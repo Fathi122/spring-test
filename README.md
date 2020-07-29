@@ -31,8 +31,8 @@ kubectl create secret generic ggsecret --from-file=api-cred=$PWD/sec.json
 - Then create a Kubernetes ClusterIP service
 
 ```
-kubectl create -f test/k8s-spring-deployment.yaml
-kubectl create -f test/k8s-spring-svc.yaml
+kubectl create -f ./k8s-spring-deployment.yaml
+kubectl create -f ./k8s-spring-svc.yaml
 ```
 
 ## For testing deployment from host
@@ -44,9 +44,10 @@ kubectl get pod
 kubectl port-forward spring-test-gcp-xxxxx 7000:8080
 ```
 
-- Then issue curl commands to create/update/read objects on GCP datastore
+- Then issue curl commands to create/update/read/delete objects on GCP datastore
 
 ```
 curl -H "Content-Type: application/json" -XPOST -d '{"id": 1225,"name":"user1","address":"15 Colomb Avenue"}' http://localhost:7000/api/user
 curl -XGET  http://localhost:7000/api/user/1225
+curl -XDELETE  http://localhost:7000/api/user/1225
 ```
