@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: spring-test-gcp
+  name: spring-test-gcp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring-test-gcp
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: spring-test-gcp
+    spec:
+      containers:
+      - image: taf122/spring-test-gcp:0.1.0
+        name: spring-test-gcp
+        env:
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          value: "/opt/secret/secret.json"
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+        - name: ggcred
+          mountPath: "/opt/secret"
+          readOnly: true
+      volumes:
+      - name: ggcred
+        secret:
+          secretName: ggsecret
+          items:
+          - key: api-cred
+            path: secret.json
