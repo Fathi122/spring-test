@@ -8,13 +8,13 @@ gcloud config set project <YOUR PROJECT ID>
 gcloud auth login
 ```
 
-## For local testing login with app engine default service account
+## For local testing login with app engine default service account from Eclipse IDE
 
 ```
 gcloud auth application-default login
 ```
 
-## For building and pushing docker image to registry
+## For building and pushing docker image to dockerHub registry
 
 ```
 mvn clean compile jib:build
