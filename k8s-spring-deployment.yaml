@@ -1,3 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: spring-test-gcp
+  namespace: spring-test
+spec:
+  type: ClusterIP
+  selector:
+    app: spring-test-gcp
+  ports:
+    - port: 7000
+      targetPort: 8080
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -5,6 +18,7 @@ metadata:
   labels:
     app: spring-test-gcp
   name: spring-test-gcp
+  namespace: spring-test
 spec:
   replicas: 1
   selector:
@@ -16,6 +30,7 @@ spec:
       creationTimestamp: null
       labels:
         app: spring-test-gcp
+      namespace: spring-test
     spec:
       containers:
       - image: taf122/spring-test-gcp:0.1.0
