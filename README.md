@@ -48,6 +48,7 @@ kubectl port-forward spring-test-gcp-xxxxx 7000:8080 -n spring-test
 
 ```
 curl -H "Content-Type: application/json" -XPOST -d '{"id": 1225,"name":"user1","address":"15 Colomb Avenue"}' http://localhost:7000/api/user
+curl -H "Content-Type: application/json" -XPUT -d '{"id": 1225,"name":"user1","address":"15 Colomb Street"}' http://localhost:7000/api/user
 curl -XGET  http://localhost:7000/api/user/1225
 curl -XDELETE  http://localhost:7000/api/user/1225
 ```
