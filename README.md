@@ -25,14 +25,14 @@ mvn clean compile jib:build
 - First create a Kubernetes secret from the app engine default service account obtained from GCP APIs portal
 
 ```
-kubectl create secret generic ggsecret --from-file=api-cred=$PWD/sec.json
+kubectl create ns spring-test
+kubectl create secret generic ggsecret --from-file=api-cred=$PWD/test/secrets/sec.json -n spring-test
 ```
 
 - Then create a Kubernetes ClusterIP service
 
 ```
 kubectl create -f ./k8s-spring-deployment.yaml
-kubectl create -f ./k8s-spring-svc.yaml
 ```
 
 ## For testing deployment from host
@@ -40,8 +40,8 @@ kubectl create -f ./k8s-spring-svc.yaml
 - Create Port forwarding in order to access spring-test-gcp K8s service
 
 ```
-kubectl get pod
-kubectl port-forward spring-test-gcp-xxxxx 7000:8080
+kubectl get po -n spring-test
+kubectl port-forward spring-test-gcp-xxxxx 7000:8080 -n spring-test
 ```
 
 - Then issue curl commands to create/update/read/delete objects on GCP datastore
