@@ -52,7 +52,7 @@ curl -XGET  http://localhost:7000/api/user/1225
 curl -XDELETE  http://localhost:7000/api/user/1225
 ```
 
-- To Clean-up resources at the end of the test
+- To Clean-up K8s resources at the end of the test
 
 ```
 kubectl delete secret ggsecret -n spring-test && kubectl delete -f k8s-spring-deployment.yaml && kubectl delete ns spring-test
